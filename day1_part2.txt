@@ -1,0 +1,16 @@
+
+/*
+ * Explanation
+ * -----------
+ *
+ * The parsing part is the same as in Day1/Part1.
+ * In this algorithm we simply go through every element of list1 and compare it with all elements of list2.
+ * This is an O(N^2) operation.
+ *
+ * Another alternative would be to sort both arrays and then, when iterating elements in list1,
+ * we could stop the iteration of list2 once its elements were greater than the current list1
+ * element. In this method we could also re-use the last partial similarity score from the previous
+ * list1 when two elements of list1 are the same. However, this method would be better only if an
+ * O(NlogN) sorting algorithm was used; Otherwise, if an O(N^2) one was used, the alternative method
+ * would prove to be slower than the present one.
+*/

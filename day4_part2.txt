@@ -1,0 +1,14 @@
+/*
+ * Explanation
+ * -----------
+ *
+ * In the second part of the problem, the program must find all occurences of the word "MAS" that
+ * are diagonal and also share an 'A' with other "MAS" words. "MAS" may appear both LTR and RTL.
+ *
+ * To solve this problem only the `check_diagonal` function from the previous task is used while `check_substring` is used
+ * once again. This time, we only need to check if "MAS" appears diagonally LTR and if an occurence is found, then we can check
+ * if it also appears RTL, thus creating a crossed "MAS". Whenever `check_diagonal` finds an occurence via `check_substring` the
+ * `check_crossed` function is executed, whose arguments are the letter buffer and the index of the found "MAS". This function will
+ * then find the index of the expected "MAS" of the opposite direction, construct the small buffer and pass it to `check_substring`.
+ * If there is an occurence in the expected location a crosedd-"MAS"
+*/

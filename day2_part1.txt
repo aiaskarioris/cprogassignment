@@ -1,0 +1,23 @@
+
+/*
+ * Explanation
+ * -----------
+ *
+ * A report contains a number of levels. In order for a report to be deemed 'safe', all of its levels must be
+ * monotonic (all increasing or all decreasing) and any difference
+ * between consecutive levels should be at most 2. Two levels that are the same will cause the report to be unsafe.
+ *
+ * The input file contains one report per line, with levels being separated by spaces. The helper struct `report_t` is defined
+ * to store each report, with a statically allocated array of 8 reports and a length variable. The input file is first parsed
+ * character by character, essentially utilizing a state-machine. This routine updates the `temp` variable whenever a digit is
+ * found and adds the number to the report object when a space is encountered. Newlines cause the routine to start working on a new report.
+ * For simplicity, all arrays (the reports array and the levels arrays within) are defined to be static in size. This is bad for memory
+ * efficiency and a more proper approach would be to use a dynamically allocated container (such as vectors in C++).
+ *
+ * All reports are processed independently by the `check_report` function. First, the function determines if the levels should be expected
+ * to be all-increasing or all-decreasing, based on the relation between the first two levels of the entry. Then, for the rest of the report,
+ * consecutive levels are checked on whether they are monotonic and whether their numeric difference exceeds the defined threshold.
+ * If any check fails, the routine immediately returns 0, notifying its caller that the given report is unsafe. Otherwise, if no check causes
+ * a fail, the routine will reach its final instruction and 1 will be returned.
+ *
+*/

@@ -1,0 +1,16 @@
+/*
+ * Explanation
+ * -----------
+ *
+ * We want to compare the numeric differences of the two lists and sum them. After parsing the input file,
+ * each list is repeatedly checked to get the next pair of smallest numbers via the `find_min_argpos` function.
+ * In order to count each entry once, entries are replaced with the placeholder value `CHECKED_ID` after
+ * being processed.
+ *
+ * Is this the best solution? Not at all.
+ * The best (?) solution would be to simply sort both lists independently and then iterate over
+ * each pair and summing the differences.
+ *
+ * The reason I came up with this much more convoluted method of solving this was because I was under the
+ * impression the problem wanted to compare the *difference in position within the lists* of each pair.
+*/

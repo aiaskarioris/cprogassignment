@@ -1,0 +1,44 @@
+
+/*
+ * Explanation
+ * -----------
+ *
+ * This puzzle is solved by finding all occurrences of the word XMAS in a grid of letters. XMAS may appear
+ * in a row, in a column or diagonally. The desired word may appear backwards as well (SAMX).
+ *
+ * This puzzle is quite complicated so we break down into smaller problems. The input letter grid is parsed
+ * sequentially row-wise, column-wise and diagonally. The 4-letter substrings parsed are given as arguments
+ * to the `check_substring` function, which returns 1 if the substring is the desired word (XMAS or SAMX).
+ *
+ * The input grid is supplied to the program by a file. By counting the number of letters before the first newline
+ * character the row length (`x_len`) is found. By dividing the number of bytes read from the file with `x_len+1`,
+ * the number of rows (`y_len`) is derived. 1 is added to `x_len` to accommodate for the newline character present
+ * in the file buffer. After the dimensions of the grid are known, each line is copied into a buffer, skipping
+ * the newline character that would otherwise complicate the algorithm slightly.
+ *
+ * The three directions checked are split into three different functions, one for each direction. To search for
+ * occurrences in rows, `check_substring` is given as input pointers within the grid buffer. This is achieved via
+ * the `check_horizontal` function. This function scans rows from top to bottom and goes to the next row when
+ * there aren't any characters left in the current row to form a 4-letter substring.
+ *
+ * The function `check_vertical` scans columns for occurrences. Since `check_substring` expects a continuous buffer
+ * of 4 letters, this function uses a small 4-letter buffer to extract substrings from columns into continuous memory.
+ * Similar to `check_horizontal`, this function will go to the next column when the current one has not enough letters
+ * to fill the short buffer.
+ *
+ * Finally, the `check_diagonal` function is the most complicated one but works similar to the previous ones. A short
+ * buffer is used again but this time it is filled by letters in diagonal lines. A 2D grid has some diagonal lines
+ * starting from the letters in the first row and some diagonal lines starting from the first column
+ * when parsing lines from left to right and an equal number of diagonal lines when parsing from right to left.
+ * In both LTR and RTL parsing, the longest diagonal line start both from the first/last row and first/last column.
+ * The `check_diagonal` function starts from the first row of the grid and checks all diagonal lines LTR, then starts
+ * from the first column and checks LTR and finally repeates these two processes from the last element of the first
+ * row and the last column respectively.
+ *
+ * The three check functions can be executed in any order. They all return the number of occurrences the found. Since
+ * the letter grid is just read (and not overwritten), the functions could be executed in parallel. Interestingly,
+ * `check_substring` could be accelerated by SIMD operations, thus checking if the 4 input letters and the 4 target
+ * letters are the same in a single operation.
+ *
+
+*/
